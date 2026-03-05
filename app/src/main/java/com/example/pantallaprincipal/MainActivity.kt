@@ -9,6 +9,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +27,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WelcomeScreen()
+            //WelcomeScreen()
+           // LoginScreen()
+            RegisterScreen()
         }
     }
 }
@@ -157,5 +162,149 @@ fun SocialCircle(text: String, bg: Color) {
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp
         )
+    }
+}
+
+@Composable
+fun LoginScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        // Título
+        Text(text = "Welcome Back", fontSize = 28.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Please sign in to your account", color = Color.Gray, fontSize = 16.sp)
+
+        Spacer(modifier = Modifier.height(40.dp))
+
+        // Campo de Email
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Email") },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Campo de Contraseña
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Password") },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        //Olvido contraseña
+        Text(text = "Forgot your password?", color = Color.Gray, fontSize = 14.sp)
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // Botón Login
+        Surface(
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+            shape = RoundedCornerShape(28.dp),
+            color = Color(0xFF5E50A5)
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Text(text = "Login", color = Color.White, fontWeight = FontWeight.Bold)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        // Texto inferior
+        Row {
+            Text(text = "Don't have an account? ", color = Color.Gray)
+            Text(text = "Create", color = Color(0xFF5E50A5), fontWeight = FontWeight.Bold)
+        }
+    }
+
+
+}
+
+@Composable
+fun RegisterScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.height(40.dp))
+
+        Text(text = "Create Account", fontSize = 28.sp, fontWeight = FontWeight.Bold)
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // Campo Nombre
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Name") },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Campo Email
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Email Address") },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Campo Password
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Password") },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Campo Repeat Password
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Repeat Password") },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // Botón Sign Up
+        Surface(
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+            shape = RoundedCornerShape(28.dp),
+            color = Color(0xFF5E50A5)
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Text(text = "Sign Up", color = Color.White, fontWeight = FontWeight.Bold)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        // Texto inferior
+        Row {
+            Text(text = "Already have an account? ", color = Color.Gray)
+            Text(text = "Login", color = Color(0xFF5E50A5), fontWeight = FontWeight.Bold)
+        }
     }
 }

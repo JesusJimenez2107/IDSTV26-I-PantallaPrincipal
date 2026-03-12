@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PantallaPrincipal">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.theme.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="Pantalla Principal-"
             android:theme="@style/Theme.PantallaPrincipal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,6 @@
 package com.example.pantallaprincipal.screens
 
+import android.util.Patterns
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,9 +23,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 
 @Composable
 fun LoginScreen (navController: NavController){
+    // Estados para los inputs
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    // Lógica de validación
+    val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    val isPasswordNotEmpty = password.isNotEmpty()
+    val isFormValid = isEmailValid && isPasswordNotEmpty
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -40,22 +59,28 @@ fun LoginScreen (navController: NavController){
 
         // Campo de Email
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = email,
+            onValueChange = { email = it },
             label = { Text("Email") },
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp)
+            shape = RoundedCornerShape(12.dp),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            isError = !isEmailValid && email.isNotEmpty(),
+            singleLine = true
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         // Campo de Contraseña
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = password,
+            onValueChange = { password = it },
             label = { Text("Password") },
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp)
+            shape = RoundedCornerShape(12.dp),
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            singleLine = true
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -66,14 +91,24 @@ fun LoginScreen (navController: NavController){
         Spacer(modifier = Modifier.height(32.dp))
 
         // Botón Login
-        Surface(
-            modifier = Modifier.fillMaxWidth().height(56.dp),
+        Button(
+            onClick = { /* Acción de login */ },
+            enabled = isFormValid,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
             shape = RoundedCornerShape(28.dp),
-            color = Color(0xFF5E50A5)
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF5E50A5),
+                disabledContainerColor = Color.LightGray
+            )
         ) {
-            Box(contentAlignment = Alignment.Center) {
-                Text(text = "Login", color = Color.White, fontWeight = FontWeight.Bold)
-            }
+            Text(
+                text = "Login",
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
         }
 
         Spacer(modifier = Modifier.height(14.dp))
